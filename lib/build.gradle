@@ -14,6 +14,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+        debug {
+            task jarSetup(type: Exec) {
+                minifyEnabled true
+            }
         }
     }
 }
@@ -24,3 +30,17 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.1.1'
 }
+
+task deleteJar(type: Delete) {
+    delete 'libs/gimmelayouts.jar'
+}
+
+task createJar(type: Copy) {
+    from('build/intermediates/bundles/release')
+    into('libs/')
+    include('classes.jar')
+    rename('classes.jar', 'gimmelayouts.jar')
+}
+
+createJar.dependsOn(deleteJar, build)
+deleteJar.dependsOn(jarSetup, build)
