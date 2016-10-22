@@ -5,5 +5,6 @@ package com.nstosic.gimmelayouts;
  */
 public interface Generator {
     android.support.v7.widget.RecyclerView generateRecyclerView();
+    GimmeRecyclerView generateGimmeRecyclerView();
 
 }

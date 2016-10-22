@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class GimmeRecyclerView<T> extends RecyclerView {
 
+    private String url;
+    private String layout_title;
+
     public GimmeRecyclerView(Context context) {
         this(context, null);
     }
@@ -25,6 +28,22 @@ public class GimmeRecyclerView<T> extends RecyclerView {
 
     public GimmeRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getLayout_title() {
+        return layout_title;
+    }
+
+    public void setLayout_title(String layout_title) {
+        this.layout_title = layout_title;
     }
 
     private class GimmeRecyclerViewAdapter<T> extends RecyclerView.Adapter {

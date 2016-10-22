@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="GimmeRecyclerView">
+        <attr name="url" format="string" />
+        <attr name="child_layout" format="reference" />
+    </declare-styleable>
+</resources>
