@@ -16,18 +16,30 @@ import java.util.List;
 public class GimmeRecyclerView<T> extends RecyclerView {
 
     private String url;
-    private String layout_title;
+    private String child_layout;
 
     public GimmeRecyclerView(Context context) {
         this(context, null);
     }
 
     public GimmeRecyclerView(Context context, @Nullable AttributeSet attrs) {
-        this(context, null, android.R.style.Theme_Holo);
+        this(context, attrs, android.R.style.Theme_Holo);
     }
 
     public GimmeRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        if(!attrs.getAttributeValue("com.nstosic", "url").isEmpty()) {
+            url = attrs.getAttributeValue("com.nstosic", "url");
+        }
+        if(!attrs.getAttributeValue("com.nstosic", "child_layout").isEmpty()) {
+            child_layout = attrs.getAttributeValue("com.nstosic", "child_layout");
+        }
+    }
+
+    public GimmeRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle, String url, String child_layout) {
+        super(context, attrs, defStyle);
+        this.url = url;
+        this.child_layout = child_layout;
     }
 
     public String getUrl() {
@@ -38,12 +50,12 @@ public class GimmeRecyclerView<T> extends RecyclerView {
         this.url = url;
     }
 
-    public String getLayout_title() {
-        return layout_title;
+    public String getChild_layout() {
+        return child_layout;
     }
 
-    public void setLayout_title(String layout_title) {
-        this.layout_title = layout_title;
+    public void setChild_layout(String child_layout) {
+        this.child_layout = child_layout;
     }
 
     private class GimmeRecyclerViewAdapter<T> extends RecyclerView.Adapter {
@@ -73,6 +85,7 @@ public class GimmeRecyclerView<T> extends RecyclerView {
             }
             else {
                 //Regular case - handle data-to-view binding
+                
             }
         }
 
