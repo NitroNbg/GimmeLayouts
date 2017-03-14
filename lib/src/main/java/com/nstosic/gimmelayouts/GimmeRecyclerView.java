@@ -17,6 +17,7 @@ public class GimmeRecyclerView<T> extends RecyclerView {
 
     private String url;
     private String child_layout;
+    private List<T> list;
 
     public GimmeRecyclerView(Context context) {
         this(context, null);

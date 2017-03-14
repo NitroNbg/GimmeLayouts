@@ -4,5 +4,6 @@ package com.nstosic.gimmelayouts.errors;
  * Created by nstosic on 3/14/17.
  */
 
-public class GimmeLayoutsException {
+public abstract class GimmeLayoutsException extends Exception {
+
 }
