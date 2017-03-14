@@ -27,7 +27,7 @@ cache:
 before_script:
   - chmod +x gradlew
   - android list targets
-  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
+  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi default/$ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
 script:
   - echo "Travis branch is $TRAVIS_BRANCH"
