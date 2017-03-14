@@ -1,14 +1,43 @@
 language: android
 jdk: oraclejdk8
+sudo: false
+env:
+  matrix:
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi_v7a
+    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi_v7a
+  global:
+    - ADB_INSTALL_TIMEOUT=10
 android:
   components:
   - platform-tools
   - tools
   - build-tools-25.0.2
-  - android-21
   - android-22
   - android-25
   - extra-android-m2repository
   - extra-google-android-support
+  - sys-img-armeabi-v7a-android-22
+  - sys-img-armeabi-v7a-android-25
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.gradle/daemon
+    - $HOME/.gradle/native
+before_script:
+  - chmod +x gradlew
+  - android list targets
+  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
 script:
-  - ./gradlew test assembleDebug
+  - echo "Travis branch is $TRAVIS_BRANCH"
+  - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+  - android-wait-for-emulator
+  - adb devices
+  - adb shell input keyevent 82 &
+  - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
+  - ./gradlew test :lib:testDebug
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov
