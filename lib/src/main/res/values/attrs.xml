@@ -1,5 +1,6 @@
 <resources>
-    <declare-styleable name="GimmeRecyclerView">
+    <declare-styleable name="GimmeRecyclerViewImpl">
+        <attr name="autofire" format="boolean" />
         <attr name="url" format="string" />
         <attr name="child_layout" format="reference" />
     </declare-styleable>
