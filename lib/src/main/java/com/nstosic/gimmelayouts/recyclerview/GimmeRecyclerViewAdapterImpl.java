@@ -80,14 +80,24 @@ public class GimmeRecyclerViewAdapterImpl<T> extends RecyclerView.Adapter<GimmeR
 
     @Override
     public void onBindViewHolder(GimmeRecyclerViewHolder<T> holder, int position) {
+        if(list == null) {
+            throw new NullPointerException(this.getClass().getCanonicalName() + " list not initialized!");
+        }
+        else if(position < 0 || position > list.size()) {
+            throw new ArrayIndexOutOfBoundsException(String.format("Cannot get element %d of %s list. The list contains %d element(s).", position, this.getClass().getCanonicalName(), this.list.size()));
+        }
+        else {
+            //Regular case - handle data-to-view binding
 
+        }
     }
 
     @Override
     public int getItemCount() {
-        if (list != null) {
-            return list.size();
+        if(list == null) {
+            Log.w(Constants.TAG, this.getClass().getCanonicalName() + ".getItemCount() method called before initializing the list with data.");
+            return 0;
         }
-        return 0;
+        return list.size();
     }
 }

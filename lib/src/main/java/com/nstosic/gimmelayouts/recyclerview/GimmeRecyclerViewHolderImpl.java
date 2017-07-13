@@ -36,6 +36,6 @@ public class GimmeRecyclerViewHolderImpl<T> extends GimmeRecyclerViewHolder {
             View child = container.getChildAt(i);
             items.put(child.getId(), child);
         }
-        
+
     }
 }

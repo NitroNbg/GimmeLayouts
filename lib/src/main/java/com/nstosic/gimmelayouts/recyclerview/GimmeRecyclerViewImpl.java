@@ -61,45 +61,13 @@ public class GimmeRecyclerViewImpl<T> extends RecyclerView implements GimmeRecyc
         this.url = url;
     }
 
-    private class GimmeRecyclerViewAdapter<T> extends RecyclerView.Adapter {
+    public boolean isAutofire() {
+        return autofire;
+    }
 
-        private List<T> list;
-
-        public GimmeRecyclerViewAdapter() {
-            list = new LinkedList<>();
-        }
-
-        public GimmeRecyclerViewAdapter(List<T> list) {
-            this.list = list;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            if(list == null) {
-                throw new NullPointerException(this.getClass().getCanonicalName() + " list not initialized!");
-            }
-            else if(position < 0 || position > list.size()) {
-                throw new ArrayIndexOutOfBoundsException(String.format("Cannot get element %d of %s list. The list contains %d element(s).", position, this.getClass().getCanonicalName(), this.list.size()));
-            }
-            else {
-                //Regular case - handle data-to-view binding
-                
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            if(list == null) {
-                Log.w(Constants.TAG, this.getClass().getCanonicalName() + ".getItemCount() method called before initializing the list with data.");
-                return 0;
-            }
-            return list.size();
-        }
+    @Override
+    public void setAutofire(boolean autofire) {
+        this.autofire = autofire;
     }
 
     //MARK - GimmeRecyclerView methods
@@ -127,4 +95,6 @@ public class GimmeRecyclerViewImpl<T> extends RecyclerView implements GimmeRecyc
         //TODO Fetch network data from url
         return true;
     }
+
+
 }
